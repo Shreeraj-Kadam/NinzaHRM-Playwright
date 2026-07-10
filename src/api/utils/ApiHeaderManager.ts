@@ -1,0 +1,31 @@
+export class ApiHeaderManager {
+
+    public static getDefaultHeaders(): Record<string, string> {
+
+        return {
+
+            "Content-Type": "application/json",
+
+            "Accept": "application/json"
+
+        };
+
+    }
+
+    public static getAuthorizedHeaders(
+        token: string
+    ): Record<string, string> {
+
+        return {
+
+            "Content-Type": "application/json",
+
+            "Accept": "application/json",
+
+            "Authorization": `Bearer ${token}`
+
+        };
+
+    }
+
+}
