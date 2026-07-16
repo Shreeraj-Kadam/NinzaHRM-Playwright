@@ -4,11 +4,11 @@ pipeline {
 
     stages {
 
-        stage('Hello Pipeline') {
+        stage('Install Dependencies') {
 
             steps {
 
-                echo 'Hello Shreeraj! Jenkins Pipeline is working.'
+                bat 'call npm install'
 
             }
 
