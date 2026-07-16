@@ -14,6 +14,16 @@ pipeline {
 
         }
 
+        stage('Install Playwright Browsers') {
+
+            steps {
+
+                bat 'call npx playwright install'
+
+            }
+
+        }
+
     }
 
 }
