@@ -24,6 +24,16 @@ pipeline {
 
         }
 
+        stage('Run Playwright Tests') {
+
+            steps {
+
+                bat 'call npm run test'
+
+            }
+
+        }
+
     }
 
 }
