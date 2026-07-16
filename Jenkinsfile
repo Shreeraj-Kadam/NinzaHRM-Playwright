@@ -2,6 +2,30 @@ pipeline {
 
     agent any
 
+    parameters {
+
+        choice(
+            name: 'TEST_ENV',
+            choices: ['qa', 'uat', 'stage'],
+            description: 'Select Environment'
+        )
+
+        choice(
+            name: 'BROWSER',
+            choices: ['chromium', 'firefox', 'webkit'],
+            description: 'Select Browser'
+        )
+
+    }
+
+    environment {
+
+        TEST_ENV = "${params.TEST_ENV}"
+
+        BROWSER = "${params.BROWSER}"
+
+    }
+
     stages {
 
         stage('Install Dependencies') {
@@ -28,7 +52,7 @@ pipeline {
 
             steps {
 
-                bat 'call npm run test'
+                bat 'call npx playwright test --project=%BROWSER%'
 
             }
 
