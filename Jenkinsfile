@@ -34,13 +34,17 @@ pipeline {
 
         }
 
-        stage('Generate Allure Report') {
+    }
 
-            steps {
+    post {
 
-                bat 'call npm run allure:generate'
+        always {
 
-            }
+            bat 'call npm run allure:generate'
+
+            archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+
+            archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
 
         }
 
