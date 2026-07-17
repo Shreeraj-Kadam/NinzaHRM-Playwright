@@ -80,7 +80,7 @@ pipeline {
             reportName: 'Playwright HTML Report'
         ])
 
-            cleanWs()
+            //cleanWs()
         }
     }
 }
