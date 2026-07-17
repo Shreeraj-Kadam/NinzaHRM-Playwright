@@ -15,13 +15,11 @@ pipeline {
             choices: ['chromium', 'firefox', 'webkit'],
             description: 'Select Browser'
         )
-
     }
 
     environment {
 
         TEST_ENV = "${params.TEST_ENV}"
-
         BROWSER = "${params.BROWSER}"
 
     }
@@ -29,33 +27,21 @@ pipeline {
     stages {
 
         stage('Install Dependencies') {
-
             steps {
-
                 bat 'call npm install'
-
             }
-
         }
 
         stage('Install Playwright Browsers') {
-
             steps {
-
                 bat 'call npx playwright install'
-
             }
-
         }
 
         stage('Run Playwright Tests') {
-
             steps {
-
                 bat 'call npx playwright test --project=%BROWSER%'
-
             }
-
         }
 
     }
