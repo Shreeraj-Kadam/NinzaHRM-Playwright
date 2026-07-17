@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     options {
@@ -8,7 +7,6 @@ pipeline {
     }
 
     parameters {
-
         choice(
             name: 'TEST_ENV',
             choices: ['qa', 'uat', 'stage'],
@@ -20,18 +18,14 @@ pipeline {
             choices: ['chromium', 'firefox', 'webkit'],
             description: 'Select Browser'
         )
-
     }
 
     environment {
-
         TEST_ENV = "${params.TEST_ENV}"
         BROWSER = "${params.BROWSER}"
-
     }
 
     stages {
-
         stage('Clean Workspace') {
             steps {
                 cleanWs()
@@ -61,13 +55,10 @@ pipeline {
                 bat 'call npx playwright test --project=%BROWSER%'
             }
         }
-
     }
 
     post {
-
         always {
-
             bat 'call npm run allure:generate'
 
             archiveArtifacts(
@@ -80,9 +71,16 @@ pipeline {
                 fingerprint: true
             )
 
+            publishHTML([
+            allowMissing: false,
+            alwaysLinkToLastBuild: true,
+            keepAll: true,
+            reportDir: 'playwright-report',
+            reportFiles: 'index.html',
+            reportName: 'Playwright HTML Report'
+        ])
+
             cleanWs()
         }
-
     }
-
 }
